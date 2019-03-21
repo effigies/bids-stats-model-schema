@@ -4,6 +4,14 @@
   "$schema": "http://json-schema.org/draft-04/schema#",
   "type": "object",
   "definitions": {
+    "InputFilter" {
+      "type": "object",
+      "properties": {
+        "task": {"type": "string"},
+        "run": {"type": "string"},
+        "subject": {"type": "string"}
+      }
+    },
     "Contrasts": {
       "ttest": {
         "type": "object",
@@ -318,7 +326,7 @@
           "Name": {"type": "string", "const": "Assign"},
           "Input": {"$ref":  "#/definitions/transformationArgs/Input"},
           "Target": {"$ref":  "#/definitions/transformationArgs/Target"},
-          "Target_attr": {"$ref":  "#/definitions/transformationArgs/InputAttr"},
+          "TargetAttr": {"$ref":  "#/definitions/transformationArgs/InputAttr"},
           "Output": {"$ref":  "#/definitions/transformationArgs/OutputArr"},
           "InputAttr": {"$ref":  "#/definitions/transformationArgs/InputAttr"},
           "OutputAttr": {"$ref":  "#/definitions/transformationArgs/OutputAttr"}
@@ -657,10 +665,10 @@
     },
     "Input": {
       "type": "object",
+      "anyOf": {"$ref":  "#/definitions/InputFilter"},
       "properties": {
-        "Task": {
-          "type": "string"
-        }
+          "Include": {"$ref":  "#/definitions/InputFilter"},
+          "Exclude": {"$ref":  "#/definitions/InputFilter"},
       }
     },
     "Steps": {
